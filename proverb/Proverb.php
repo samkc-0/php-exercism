@@ -26,8 +26,18 @@ declare(strict_types=1);
 
 class Proverb
 {
-    public function recite()
+    public function recite(array $pieces): array
     {
-        throw new \BadMethodCallException(sprintf('Implement the %s method', __FUNCTION__));
+        if (count($pieces) == 0) return [];
+        $out = [];
+        $n = count($pieces);
+        for ($i = 1; $i < $n; $i++)
+        {
+            $want = $pieces[$i - 1];
+            $lost = $pieces[$i];
+            $out[] = "For want of a $want the $lost was lost.";
+        }
+        $out[] = 'And all for the want of a ' . $pieces[0] . '.';
+        return $out;
     }
 }
